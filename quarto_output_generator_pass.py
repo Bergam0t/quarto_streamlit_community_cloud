@@ -16,7 +16,7 @@ by quarto when rendering the document.
 
 first_number_input = st.slider("Enter a first number", 1, 100)
 
-second_number_input = st.number_input("Enter a second number")
+second_number_input = st.number_input("Enter a second number", value=42)
 
 operation_input = st.selectbox(
     "Select an operation",
