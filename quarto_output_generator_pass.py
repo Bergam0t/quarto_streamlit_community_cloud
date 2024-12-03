@@ -3,8 +3,7 @@ import json
 import os
 import subprocess
 
-if "download_clicked" not in st.session_state:
-    st.session_state.download_clicked = False
+st.session_state.download_clicked = False
 
 st.title("Passing Parameters to a Quarto Template")
 
