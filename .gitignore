@@ -1,3 +1,4 @@
 session_data.json
 
 /.quarto/
+/outputs/*.html
