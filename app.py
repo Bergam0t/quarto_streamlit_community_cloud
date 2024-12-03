@@ -17,15 +17,12 @@ def get_quarto(repo_name, quarto_version="1.5.57"):
     os.system("pwd")
 
     # # Ensure PATH is updated in the current Python process
-    # # os.environ['QUARTO_PATH'] = f"{f'/mount/src/project_toy_mecc/quarto-{quarto_version}/bin/quarto'}"
-    # quarto_dir = f'/mount/src/project_toy_mecc/quarto-{quarto_version}/bin/quarto'
-    # os.environ['PATH'] = f"{quarto_dir}:{os.environ['PATH']}"
-
+    # Check current path
     os.system("echo $PATH")
-
+    # Create a folder and symlink quarto to that location
     os.system(f"mkdir -p /mount/src/{repo_name}/local/bin")
     os.system(f"ln -s /mount/src/{repo_name}/quarto-{quarto_version}/bin/quarto /mount/src/{repo_name}/local/bin")
-
+    # Update path
     os.system(f"echo 'export PATH=$PATH:/mount/src/{repo_name}/local/bin' >> ~/.bashrc")
     os.system('source /etc/bash.bashrc')
     # alternative method for good measure
@@ -33,8 +30,10 @@ def get_quarto(repo_name, quarto_version="1.5.57"):
 
     # ensure path updates have propagated through
     print(os.environ['PATH'])
-
+    # Install jupyter even if not in requirements
     os.system("python3 -m pip install jupyter")
+    # Install second copy of requirements (so accessible by Quarto - can't access packages
+    # that are installed as part of community cloud instance setup process)
     os.system(f"python3 -m pip install -r /mount/src/{repo_name}/requirements.txt")
 
     print("Trying to run 'quarto check' command")
@@ -51,13 +50,12 @@ def get_quarto(repo_name, quarto_version="1.5.57"):
 
 st.set_page_config(layout="wide")
 
-
 # If running on community cloud, output of this is an empty string
 # If this is the case, we'll try to install quarto
 if platform.processor() == '':
     get_quarto("quarto_streamlit_community_cloud") # This name must match the repository name on GitHub
 
-
+# Set up multipage navigation
 pg = st.navigation(
 
     [st.Page("introduction.py",
