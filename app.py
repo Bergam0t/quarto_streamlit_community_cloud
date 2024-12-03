@@ -55,7 +55,8 @@ st.set_page_config(layout="wide")
 # If running on community cloud, output of this is an empty string
 # If this is the case, we'll try to install quarto
 if platform.processor() == '':
-    get_quarto("quarto_streamlit_community_cloud")
+    get_quarto("quarto_on_community_cloud") # This name must match the central portion of the url
+    # e.g. here the url is https://quarto-on-community-cloud.streamlit.app
 
 
 pg = st.navigation(
