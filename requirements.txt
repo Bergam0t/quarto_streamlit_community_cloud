@@ -1,0 +1,2 @@
+streamlit==1.37.0
+quarto==0.1.0

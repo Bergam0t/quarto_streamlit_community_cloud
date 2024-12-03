@@ -1,0 +1,70 @@
+---
+title: "Sample Quarto Report"
+execute:
+  echo: false
+format:
+    html:
+        # toc: true
+        embed-resources: true
+        # URL options
+        link-external-icon: true
+        link-external-newwindow: true
+        # Reference options
+        citations-hover: true
+        footnotes-hover: true
+        #####################
+        # NHS Theme options #
+        #####################
+        css: "NHS_report_theme.css"
+        callout-appearance: simple
+        callout-collapse: true
+        # Caption options
+        cap-location: bottom
+        # Title options
+        title-block-banner: '#005EB8'
+        backgroundcolor: '#f0f4f5'
+        # Set font
+        mainfont: 'Open Sans'
+---
+
+```{python}
+#| echo: false
+#| label: get_data
+import json
+import os
+
+json_path = os.path.join(os.getcwd(),'session_data.json')
+
+# Load session data from JSON
+with open(json_path, "r") as f:
+    session_data = json.load(f)
+```
+
+## Inputs
+
+Your first number was `{python} session_data["input_1"]`
+
+Your second number was `{python} session_data["input_2"]`
+
+You chose to **`{python} session_data["operation"].lower()`** these numbers
+
+## Output
+
+```{python}
+if session_data["operation"] == "Add":
+    result = session_data["input_1"] + session_data["input_2"]
+
+elif session_data["operation"] == "Subtract":
+    result = session_data["input_1"] - session_data["input_2"]
+
+elif session_data["operation"] == "Multiply":
+    result = session_data["input_1"] * session_data["input_2"]
+
+elif session_data["operation"] == "Divide":
+    result = session_data["input_1"] / session_data["input_2"]
+
+else:
+    result = "Error"
+```
+
+The answer to your calculation is `{python} result`
